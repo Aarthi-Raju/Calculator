@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            gap: 50px;
+        }
+
+        .r1,
+        .r2,
+        .r3,
+        .r4,
+        .r5 {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .calci {
+            width: 350px;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 40px;
+            border-radius: 50px;
+            border: 3px black solid;
+        }
+
+        .typed {
+            color: gray;
+            text-align: right;
+            padding: 5px 0px;
+            overflow: hidden;
+        }
+
+        .typing {
+            color: black;
+            text-align: right;
+            font-size: 35px;
+            font-weight: 500;
+            padding: 5px 0px;
+            border-bottom: 2px rgb(187, 187, 187) solid;
+            overflow: hidden;
+        }
+
+        .button {
+            height: 65px;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 30px;
+        }
+
+        #clear,
+        #modulo,
+        #back,
+        #divide,
+        #multiply,
+        #minus,
+        #plus,
+        #equal {
+            background-color: rgb(12, 135, 113);
+            color: white;
+        }
+
+        #seven,
+        #eight,
+        #nine,
+        #six,
+        #five,
+        #four,
+        #three,
+        #two,
+        #one,
+        #double_zero,
+        #zero,
+        #dot {
+            background-color: rgb(197, 223, 218);
+        }
+
+        .r1 {
+            margin-top: 15px;
+        }
+
+        #mode {
+            height: 20px;
+            width: 20px;
+            background-color: rgb(12, 44, 34);
+            margin-left: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        style="font-size: xx-large; font-weight: bold; color: rgb(12, 89, 75); margin-top: 50px; text-decoration: underline;">
+        CALCULATOR</div>
+    <div class="calci" id="calci">
+        <div id="mode" onclick="tognav()"></div>
+        <div class="typed" id="typed"></div>
+        <div class="typing" id="typing">0</div>
+        <div class="r1">
+            <div class="button" id="clear" onclick="document.getElementById('typing').innerHTML='0'">C</div>
+            <div class="button" id="modulo" onclick="fn('%')">%</div>
+            <div class="button" id="back"
+                onclick="document.getElementById('typing').innerHTML='0';document.getElementById('typed').innerHTML=' ' ">
+                CE</div>
+            <div class="button" id="divide" onclick="fn('/')">/</div>
+        </div>
+        <div class="r2">
+            <div class="button" id="seven" onclick="fn(7)">7</div>
+            <div class="button" id="eight" onclick="fn(8)">8</div>
+            <div class="button" id="nine" onclick="fn(9)">9</div>
+            <div class="button" id="multiply" onclick="fn('*')">x</div>
+        </div>
+        <div class="r3">
+            <div class="button" id="four" onclick="fn(4)">4</div>
+            <div class="button" id="five" onclick="fn(5)">5</div>
+            <div class="button" id="six" onclick="fn(6)">6</div>
+            <div class="button" id="minus" onclick="fn('-')">-</div>
+        </div>
+        <div class="r4">
+            <div class="button" id="one" onclick="fn(1)">1</div>
+            <div class="button" id="two" onclick="fn(2)">2</div>
+            <div class="button" id="three" onclick="fn(3)">3</div>
+            <div class="button" id="plus" onclick="fn('+')">+</div>
+        </div>
+        <div class="r5">
+            <div class="button" id="double_zero">00</div>
+            <div class="button" id="zero" onclick="fn(0)">0</div>
+            <div class="button" id="dot" onclick="fn('.')">.</div>
+            <div class="button" id="equal" onclick="result()">=</div>
+        </div>
+    </div>
+</body>
+<script>
+    function fn(param) {
+        if (document.getElementById("typed").innerHTML == ' ' || document.getElementById("typing").innerHTML == '0') {
+            document.getElementById("typing").innerHTML = param;
+            document.getElementById("typed").innerHTML = param;
+        }
+        else if (param == '%' || param == '/' || param == '*' || param == '-' || param == '+') {
+            document.getElementById("typing").innerHTML = " ";
+            document.getElementById("typed").innerHTML += param;
+        }
+        else {
+            document.getElementById("typing").innerHTML += param;
+            document.getElementById("typed").innerHTML += param;
+        }
+    }
+    function result() {
+        let value = eval(document.getElementById("typed").innerHTML);
+        document.getElementById("typing").innerHTML = value;
+    }
+    var nav = false;
+    function dark() {
+        document.getElementById("calci").style.backgroundColor = "rgb(12, 44, 34)"
+        document.getElementById("typing").style.color = "white";
+        document.getElementById("mode").style.backgroundColor = "white";
+        nav = true;
+    }
+    function lite() {
+        document.getElementById("calci").style.backgroundColor = "white"
+        document.getElementById("typing").style.color = "black";
+        document.getElementById("mode").style.backgroundColor = "rgb(12, 44, 34)";
+        nav = false;
+    }
+    function tognav() {
+        nav ? lite() : dark();
+    }
+</script>
+
+</html>
